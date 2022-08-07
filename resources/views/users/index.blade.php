@@ -24,7 +24,7 @@
             <a class="btn btn-primary" href="{{ route('users.edit',$user['id']) }}">Edit</a>
             @csrf
             @method('DELETE')
-            <button type="submit" class="btn btn-danger">Delete</button>
+            <button type="submit" onclick="alert('Are You Sure You Want To Delete?')" class="btn btn-danger">Delete</button>
             </form></td>
       </tr>
      @endforeach

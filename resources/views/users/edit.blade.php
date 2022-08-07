@@ -1,5 +1,5 @@
 @include('includes.navbar')
-<div class="container">
+<div class="container" style="width:300px;">
 <form method="POST" action="{{ route('users.update',$users['id']) }}" >
     @method('PUT')
     @csrf
@@ -14,6 +14,6 @@
     </div>
     
  
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Edit</button>
   </form>
 </div>
