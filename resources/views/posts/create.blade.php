@@ -1,4 +1,5 @@
 @include('includes.navbar')
+@section('title', 'Create Posts')
 <div class="container">
 <form method="POST" action="{{route('posts.store')}}">
             @csrf
@@ -10,7 +11,6 @@
               <label  class="form-label">body</label>
               <input type="text" class="form-control" name="body" style="width:600px; height:200px" >
             </div>
-           
             <div class="mb-3">
               <label  class="form-label">enabled</label>
               <input type="text" class="form-control" name="enabled">
@@ -19,8 +19,6 @@
               <label  class="form-label">User ID</label>
               <input type="text" class="form-control" name="user_id">
             </div>
-           
-         
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>

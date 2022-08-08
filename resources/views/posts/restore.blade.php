@@ -2,7 +2,6 @@
 @section('title', 'Restore Page')
 @section('content')
 <div >
- @if ($posts->count()>0)
  <a href="{{route('post.restoreAll')}}" style="text-decoration:none">
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Restore All</button>
 </a>
@@ -33,7 +32,6 @@
  @endforeach
 </tbody>
 </table>
-@endif
 </div>  
       </div>
      </div>

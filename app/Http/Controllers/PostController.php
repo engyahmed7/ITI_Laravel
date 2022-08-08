@@ -141,7 +141,4 @@ class PostController extends Controller
         Post::onlyTrashed()->restore();
         return redirect()->route('posts.index');
     }
-
-
-
 }

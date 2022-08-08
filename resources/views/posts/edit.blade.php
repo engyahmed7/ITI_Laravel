@@ -1,4 +1,5 @@
 @include('includes.navbar')
+@section('title', 'Edit')
 <div class="container" style="width:300px;">
 <form method="POST" action="{{ route('posts.update',$post['id']) }}" >
     @method('PUT')
