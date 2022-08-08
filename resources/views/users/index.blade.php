@@ -30,5 +30,8 @@
      @endforeach
       </tr>
     </tbody>
+
   </table>
+  {{ $users->links() }}
+
 @endsection

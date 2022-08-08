@@ -9,8 +9,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
   </head>
   <body >
-
-    
     <nav class="navbar navbar-expand-lg bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -31,6 +29,15 @@
                 <li><a class="dropdown-item active" href="{{route('users.index')}}">List</a></li>
                 <li><a class="dropdown-item" href="{{route('users.create')}}">New User</a></li>
                 
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Posts
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item active" href="{{route('posts.index')}}">List</a></li>
+                <li><a class="dropdown-item" href="{{route('posts.create')}}">New User</a></li>
               </ul>
             </li>
           </ul>

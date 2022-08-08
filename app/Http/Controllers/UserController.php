@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -13,10 +14,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = json_decode(\Illuminate\Support\Facades\File::get(storage_path('users.json')),true);
-
+        $users = User::paginate(5);
+        // $users = User::all();
         return view('users.index')->with(['users' => $users]);
-
     }
 
     /**
@@ -26,6 +26,7 @@ class UserController extends Controller
      */
     public function create()
     {
+
         return view('users.create');
     }
 
@@ -37,8 +38,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
-        return 'Store a newly created resource in storage.';
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+        ]);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return redirect()->route('users.index');
     }
 
     /**
@@ -49,10 +58,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $users = json_decode(\Illuminate\Support\Facades\File::get(storage_path('users.json')),true);
-    
-        $users=$users[$id-1];
-      return view ('users.show')->with(['users' => $users, 'id' => $id]);
+        $user = User::find($id);
+        return view('users.show')->with(['users' => $user, 'id' => $id]);
     }
 
     /**
@@ -63,11 +70,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $users = json_decode(\Illuminate\Support\Facades\File::get(storage_path('users.json')),true);
-    
-        $users=$users[$id-1];
-      return view ('users.edit')->with(['users' => $users, 'id' => $id]);
-        
+        $user = User::find($id);
+        return view('users.edit')->with(['user' => $user]);
+
     }
 
     /**
@@ -78,12 +83,11 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    { 
-        $request->all();
-        dd($request->all());
-        $users = json_decode(\Illuminate\Support\Facades\File::get(storage_path('users.json')),true);
-        $users=$users[$id-1];
-        return  print_r($users);
+    {
+        $name = $request->input('name');
+        $email = $request->input('email');
+        User::where('id', $id)->update(['name' => $name, 'email' => $email]);
+        return redirect('/users');
     }
 
     /**
@@ -93,11 +97,9 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    { 
-        $users = json_decode(\Illuminate\Support\Facades\File::get(storage_path('users.json')),true);       
-        $user=$users[$id-1];
-        unset($user);
-            return "User deleted of id = " . $id;
-    
+    {
+        User::where('id', $id)->delete();
+        return redirect('/users');
+
     }
 }
