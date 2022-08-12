@@ -2,43 +2,53 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
-
 use Illuminate\Support\Facades\Route;
 
 /* |-------------------------------------------------------------------------- | Web Routes |-------------------------------------------------------------------------- | | Here is where you can register web routes for your application. These | routes are loaded by the RouteServiceProvider within a group which | contains the "web" middleware group. Now create something great! | */
 
 Route::get('/', function () {
     return view('welcome');
-})->name('home');
+});
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('users', [UserController::class , 'index'])->name('users.index');
-
-Route::get('users/create', [UserController::class , 'create'])->name('users.create');
-
-Route::post('users', [UserController::class , 'store'])->name('users.store');
-
-Route::get('users/{id}', [UserController::class , 'show'])->where('id', '[0-9]+')->name('users.show');
-
-Route::get('users/{id}/edit', [UserController::class , 'edit'])->name('users.edit');
-
-Route::put('users/{id}', [UserController::class , 'update'])->name('users.update');
-
-Route::delete('users/{id}', [UserController::class , 'destroy'])->name('users.destroy');
+require __DIR__ . '/auth.php';
 
 
 
-Route::get('posts', [PostController::class , 'index'])->name('posts.index');
+// Route::get('/', function () {
+//     return view('welcome');
+// })->name('home');
 
-Route::get('posts/create', [postController::class , 'create'])->name('posts.create');
+Route::get('users', [UserController::class , 'index'])->name('users.index')->middleware('auth');;
 
-Route::post('posts', [PostController::class , 'store'])->name('posts.store');
+Route::get('users/create', [UserController::class , 'create'])->name('users.create')->middleware('auth');;
 
-Route::get('posts/{id}', [PostController::class , 'show'])->where('id', '[0-9]+')->name('posts.show');
+Route::post('users', [UserController::class , 'store'])->name('users.store')->middleware('auth');;
 
-Route::get('posts/{id}/edit', [PostController::class , 'edit'])->name('posts.edit');
+Route::get('users/{id}', [UserController::class , 'show'])->where('id', '[0-9]+')->name('users.show')->middleware('auth');;
 
-Route::put('posts/{id}', [PostController::class , 'update'])->name('posts.update');
+Route::get('users/{id}/edit', [UserController::class , 'edit'])->name('users.edit')->middleware('auth');;
+
+Route::put('users/{id}', [UserController::class , 'update'])->name('users.update')->middleware('auth');;
+
+Route::delete('users/{id}', [UserController::class , 'destroy'])->name('users.destroy')->middleware('auth');;
+
+
+
+Route::get('posts', [PostController::class , 'index'])->name('posts.index')->middleware('auth');;
+
+Route::get('posts/create', [postController::class , 'create'])->name('posts.create')->middleware('auth');;
+
+Route::post('posts', [PostController::class , 'store'])->name('posts.store')->middleware('auth');;
+
+Route::get('posts/{id}', [PostController::class , 'show'])->where('id', '[0-9]+')->name('posts.show')->middleware('auth');;
+
+Route::get('posts/{id}/edit', [PostController::class , 'edit'])->name('posts.edit')->middleware('auth');;
+
+Route::put('posts/{id}', [PostController::class , 'update'])->name('posts.update')->middleware('auth');;
 
 Route::delete('posts/{id}', [PostController::class , 'destroy'])->name('posts.destroy');
 

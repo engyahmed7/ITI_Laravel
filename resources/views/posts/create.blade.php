@@ -15,10 +15,6 @@
               <label  class="form-label">enabled</label>
               <input type="text" class="form-control" name="enabled">
             </div>
-            <div class="mb-3">
-              <label  class="form-label">User ID</label>
-              <input type="text" class="form-control" name="user_id">
-            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>

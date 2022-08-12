@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,13 +15,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(5);
+        $posts = Post::paginate(10);
         // $posts = Post::all();
         return view('posts.index')->with(['posts' => $posts]);
-
-
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -40,18 +38,10 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'body' => 'required|string|max:255',
-        ]);
-        $post = new Post();
-        $post->title = $request->title;
-        $post->body = $request->body;
-        $post->enabled = $request->enabled;
-        $post->user_id = $request->user_id;
-        $post->published_at = $request->published_at;
-        $post->save();
-        return redirect()->route('posts.index');
+        $input = $request->all();
+        $user = User::find(1);
+        $user->posts()->save(new Post($input));
+        return redirect('posts');
     }
 
     /**

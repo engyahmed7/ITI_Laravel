@@ -15,6 +15,11 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
     use SoftDeletes;
 
+    public function posts()
+    {
+        return $this->hasMany('App\Models\Post');
+    }
+   
     /**
      * The attributes that are mass assignable.
      *

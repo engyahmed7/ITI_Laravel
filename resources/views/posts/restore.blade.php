@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 @section('title', 'Restore Page')
 @section('content')
 <div >
@@ -20,19 +20,19 @@
         <td scope="row">{{$post->id}}</td>
         <td scope="row">{{$post->title}}</td>
         <td scope="row">{{$post->body}}</td>
-         <td> 
-         <a  href="{{route('post.restore',['id' =>$post->id ])}}" style="text-decoration:none">  
+         <td>
+         <a  href="{{route('post.restore',['id' =>$post->id ])}}" style="text-decoration:none">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Restore</button>
-         </a>  
-         <a  href="{{route('post.delete_final',['id' =>$post->id ])}}" style="text-decoration:none">  
+         </a>
+         <a  href="{{route('post.delete_final',['id' =>$post->id ])}}" style="text-decoration:none">
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"> Delete for ever</button>
-         </a>  
+         </a>
          </td>
        </tr>
  @endforeach
 </tbody>
 </table>
-</div>  
+</div>
       </div>
      </div>
    </div>

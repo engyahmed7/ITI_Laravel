@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 @section('title', 'Posts')
 
 @section('content')
@@ -12,6 +12,7 @@
         <th scope="col">Title</th>
         <th scope="col">body</th>
         <th scope="col">User ID</th>
+        <th>User Name</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -19,16 +20,18 @@
         @foreach($posts as $post)
       <tr>
         <th scope="row">{{$post['id']}}</th>
-        
+
         <td><a href="{{ route('posts.show',$post['id']) }}"style="text-decoration:none" >{{$post['title']}}</td>
         <td>{{$post['body']}}</td>
         <td>{{$post['user_id']}}</td>
+        <td>{{$post['user']['name']}}</td>
+
         <td>
             <form action="{{ route('posts.destroy',$post['id']) }}" method="Post">
             <a class="btn btn-primary" href="{{ route('posts.edit',$post['id']) }}">Edit</a>
             @csrf
             @method('DELETE')
-            <button type="submit" onclick="alert('Are You Sure You Want To Delete?')" class="btn btn-danger">Delete</button>
+            <button type="submit" class="btn btn-danger" onclick="alert('Are You Sure You Want To Delete?')" >Delete</button>
             </form>
           </td>
       </tr>

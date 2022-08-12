@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 @section('title', 'User List')
 
 @section('content')
@@ -8,6 +8,7 @@
         <th scope="col">ID</th>
         <th scope="col">Name</th>
         <th scope="col">Email</th>
+        <th scope="col">Posts Count</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -15,10 +16,10 @@
         @foreach($users as $user)
       <tr>
         <th scope="row">{{$user['id']}}</th>
-        
+
         <td><a href="{{ route('users.show',$user['id']) }}">{{$user['name']}}</a></td>
         <td>{{$user['email']}}</td>
-    
+        <td>{{$user['posts_count']}}</td>
         <td>
             <form action="{{ route('users.destroy',$user['id']) }}" method="Post">
             <a class="btn btn-primary" href="{{ route('users.edit',$user['id']) }}">Edit</a>

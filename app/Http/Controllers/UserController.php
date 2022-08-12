@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -14,7 +15,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(5);
+        // $users = User::paginate(5);
+        $users = User::withCount('posts')->paginate(5);
         // $users = User::all();
         return view('users.index')->with(['users' => $users]);
     }
@@ -59,7 +61,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('users.show')->with(['users' => $user, 'id' => $id]);
+        return view('users.show')->with(['users' => $user]);
     }
 
     /**

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 @section('title', 'Data')
 @section('content')
 
@@ -7,7 +7,7 @@
             <div class="pull-left">
                 <h2> Show post</h2>
             </div>
-           
+
         </div>
     </div>
 
@@ -25,7 +25,6 @@
                 {{ $posts['title'] }}
             </div>
         </div>
-
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>body:</strong>
