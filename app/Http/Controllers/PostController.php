@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -38,10 +39,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+
         $input = $request->all();
-        $user = User::find(1);
-        $user->posts()->save(new Post($input));
-        return redirect('posts');
+        $user = Auth::user();
+        $input['user_id'] = $user->id;
+        Post::create($input);
+        return redirect()->route('posts.index');
+
+    // $user = User::find(1);
+    // $user->posts()->save(new Post($input));
+    // return redirect('posts');
     }
 
     /**
