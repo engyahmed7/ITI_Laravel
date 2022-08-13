@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -39,24 +40,33 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        // $this->validate($request, [
+        //     'title' => 'required | max:100',
+        //     'body' => 'required | max:100',
+        // ]);
+
         $input = $request->all();
+        if ($request->file('image')->isValid()) {
+            $input['image'] = $request->file('image')->store('posts', 'images');
+        }
+
         $user = Auth::user();
-        $input['user_id'] = $user->id;
-        Post::create($input);
+        $user->posts()->create($input);
         return redirect()->route('posts.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $post
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $post = Post::find($id);
-        return view('posts.show')->with(['posts' => $post, 'id' => $id]);
+        return view('posts.show')->with(['post' => $post]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -79,9 +89,12 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $title = $request->input('title');
-        $body = $request->input('body');
-        Post::where('id', $id)->update(['title' => $title, 'body' => $body]);
+        $post = Post::find($id);
+        if ($post->user_id != Auth::user()->id) {
+            return redirect()->route('posts.index')->with('error', 'You are not authorized to edit this post');
+        }
+        $req = $request->only(['title', 'body']);
+        Post::where('id', $id)->update($req);
         return redirect('/posts')->with('success', 'Post Updated Successfully');
     }
 

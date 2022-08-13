@@ -21,6 +21,6 @@ class Post extends Model
         'enabled',
         'user_id',
         'published_at',
-
+        'image',
     ];
 }
