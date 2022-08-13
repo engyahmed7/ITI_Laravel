@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreRequest;
 
 class PostController extends Controller
 {
@@ -38,14 +39,12 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        // $this->validate($request, [
-        //     'title' => 'required | max:100',
-        //     'body' => 'required | max:100',
-        // ]);
 
-        $input = $request->all();
+    public function store(StoreRequest $request)
+    {
+        $input = $request->validated();
+        // $input= $request->all();
+
         if ($request->file('image')->isValid()) {
             $input['image'] = $request->file('image')->store('posts', 'images');
         }
@@ -66,8 +65,6 @@ class PostController extends Controller
         $post = Post::find($id);
         return view('posts.show')->with(['post' => $post]);
     }
-
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -114,7 +111,6 @@ class PostController extends Controller
         $post = Post::onlyTrashed()->get();
         return view('posts.restore')->with('posts', $post);
     }
-
     public function delete_final($id)
     {
         $post = Post::withTrashed()->where('id', $id)->first();

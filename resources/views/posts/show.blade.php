@@ -28,7 +28,6 @@
                 <img src="{{Storage::disk('images')->url($post->image)}}" alt="" >
             </div>
         </div>
-
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('posts.index') }}"> Back</a>
         </div>
@@ -36,5 +35,3 @@
     </div>
 @endsection
 
-
-<!-- {{ Storage::disk('images')->url($post ->image)}} -->
