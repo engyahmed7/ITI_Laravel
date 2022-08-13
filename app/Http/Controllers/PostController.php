@@ -44,10 +44,6 @@ class PostController extends Controller
         $input['user_id'] = $user->id;
         Post::create($input);
         return redirect()->route('posts.index');
-
-    // $user = User::find(1);
-    // $user->posts()->save(new Post($input));
-    // return redirect('posts');
     }
 
     /**
@@ -100,18 +96,6 @@ class PostController extends Controller
         Post::where('id', $id)->delete();
         return redirect('/posts')->with('success', 'Post Deleted Successfully');
     }
-
-    // public function restore($id)
-    // {
-    //     Post::withTrashed()->find($id)->restore();
-    //     return back();
-    // }
-    // public function restoreAll()
-    // {
-    //     Post::onlyTrashed()->restore();
-    //     return back();
-    // }
-
     public function Deleted_Posts()
     {
         $post = Post::onlyTrashed()->get();
