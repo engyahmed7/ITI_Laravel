@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreRequest;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PostController extends Controller
 {
@@ -18,7 +19,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::paginate(6);
         // $posts = Post::all();
         return view('posts.index')->with(['posts' => $posts]);
     }
@@ -42,13 +43,11 @@ class PostController extends Controller
 
     public function store(StoreRequest $request)
     {
-        $input = $request->validated();
-        // $input= $request->all();
-
+        // $input = $request->validated();
+        $input = $request->all();
         if ($request->file('image')->isValid()) {
             $input['image'] = $request->file('image')->store('posts', 'images');
         }
-
         $user = Auth::user();
         $user->posts()->create($input);
         return redirect()->route('posts.index');

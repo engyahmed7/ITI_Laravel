@@ -1,6 +1,5 @@
 @extends('layouts.app2')
 @section('title', 'Posts')
-
 @section('content')
 <a href="{{route('post.Deleted_Posts')}}" style="text-decoration:none" >
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Deleted Posts</button>

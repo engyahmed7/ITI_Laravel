@@ -26,7 +26,21 @@ class StoreRequest extends FormRequest
         return [
             'title' => 'required | max:100',
             'body' => 'required | max:100',
+            'enabled' => 'required | max:100',
             'image' => 'required | image | mimes:jpeg,png,jpg,gif,svg | max:2048',
+        ];
+    }
+    public function messages()
+    {
+        return [
+            'title.required' => 'Title is required',
+            'title.max' => 'Title must be less than 100 characters',
+            'body.required' => 'Body is required',
+            'enabled.required' => 'Enabled is required',
+            'image.required' => 'Image is required',
+            'image.image' => 'Image is not valid',
+            'image.mimes' => 'Image is not valid',
+            'image.max' => 'Image is not valid',
         ];
     }
 }
