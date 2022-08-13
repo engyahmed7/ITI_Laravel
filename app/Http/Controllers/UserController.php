@@ -29,7 +29,7 @@ class UserController extends Controller
     public function create()
     {
 
-        return view('users.create');
+        return view('users.create')->with('success', 'User Created Successfully');
     }
 
     /**
@@ -89,7 +89,7 @@ class UserController extends Controller
         $name = $request->input('name');
         $email = $request->input('email');
         User::where('id', $id)->update(['name' => $name, 'email' => $email]);
-        return redirect('/users');
+        return redirect('/users')->with('success', 'User Updated Successfully');
     }
 
     /**
@@ -101,7 +101,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::where('id', $id)->delete();
-        return redirect('/users');
+        return redirect('/users')->with('success', 'User Deleted Successfully');
 
     }
 }
