@@ -12,7 +12,7 @@
         <th scope="col">Title</th>
         <th scope="col">body</th>
         <th scope="col">User ID</th>
-        <th>User Name</th>
+        <th scope="col">User Name</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>

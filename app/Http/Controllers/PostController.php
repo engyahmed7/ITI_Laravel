@@ -28,7 +28,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create')->with('success', 'Post Created Successfully');
     }
 
     /**
@@ -39,7 +39,6 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-
         $input = $request->all();
         $user = Auth::user();
         $input['user_id'] = $user->id;
@@ -87,7 +86,7 @@ class PostController extends Controller
         $title = $request->input('title');
         $body = $request->input('body');
         Post::where('id', $id)->update(['title' => $title, 'body' => $body]);
-        return redirect('/posts');
+        return redirect('/posts')->with('success', 'Post Updated Successfully');
     }
 
     /**
@@ -99,7 +98,7 @@ class PostController extends Controller
     public function destroy($id)
     {
         Post::where('id', $id)->delete();
-        return redirect('/posts');
+        return redirect('/posts')->with('success', 'Post Deleted Successfully');
     }
 
     // public function restore($id)

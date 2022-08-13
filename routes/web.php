@@ -22,33 +22,32 @@ require __DIR__ . '/auth.php';
 //     return view('welcome');
 // })->name('home');
 
-Route::get('users', [UserController::class , 'index'])->name('users.index')->middleware('auth');;
+Route::get('users', [UserController::class , 'index'])->name('users.index')->middleware('auth');
 
-Route::get('users/create', [UserController::class , 'create'])->name('users.create')->middleware('auth');;
+Route::get('users/create', [UserController::class , 'create'])->name('users.create')->middleware('auth');
 
-Route::post('users', [UserController::class , 'store'])->name('users.store')->middleware('auth');;
+Route::post('users', [UserController::class , 'store'])->name('users.store')->middleware('auth');
 
-Route::get('users/{id}', [UserController::class , 'show'])->where('id', '[0-9]+')->name('users.show')->middleware('auth');;
+Route::get('users/{id}', [UserController::class , 'show'])->where('id', '[0-9]+')->name('users.show')->middleware('auth');
 
-Route::get('users/{id}/edit', [UserController::class , 'edit'])->name('users.edit')->middleware('auth');;
+Route::get('users/{id}/edit', [UserController::class , 'edit'])->name('users.edit')->middleware('auth');
 
-Route::put('users/{id}', [UserController::class , 'update'])->name('users.update')->middleware('auth');;
+Route::put('users/{id}', [UserController::class , 'update'])->name('users.update')->middleware('auth');
 
-Route::delete('users/{id}', [UserController::class , 'destroy'])->name('users.destroy')->middleware('auth');;
+Route::delete('users/{id}', [UserController::class , 'destroy'])->name('users.destroy')->middleware('auth');
 
 
+Route::get('posts', [PostController::class , 'index'])->name('posts.index')->middleware('auth');
 
-Route::get('posts', [PostController::class , 'index'])->name('posts.index')->middleware('auth');;
+Route::get('posts/create', [postController::class , 'create'])->name('posts.create')->middleware('auth');
 
-Route::get('posts/create', [postController::class , 'create'])->name('posts.create')->middleware('auth');;
+Route::post('posts', [PostController::class , 'store'])->name('posts.store')->middleware('auth');
 
-Route::post('posts', [PostController::class , 'store'])->name('posts.store')->middleware('auth');;
+Route::get('posts/{id}', [PostController::class , 'show'])->where('id', '[0-9]+')->name('posts.show')->middleware('auth');
 
-Route::get('posts/{id}', [PostController::class , 'show'])->where('id', '[0-9]+')->name('posts.show')->middleware('auth');;
+Route::get('posts/{id}/edit', [PostController::class , 'edit'])->name('posts.edit')->middleware('auth');
 
-Route::get('posts/{id}/edit', [PostController::class , 'edit'])->name('posts.edit')->middleware('auth');;
-
-Route::put('posts/{id}', [PostController::class , 'update'])->name('posts.update')->middleware('auth');;
+Route::put('posts/{id}', [PostController::class , 'update'])->name('posts.update')->middleware('auth');
 
 Route::delete('posts/{id}', [PostController::class , 'destroy'])->name('posts.destroy');
 

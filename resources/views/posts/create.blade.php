@@ -5,11 +5,11 @@
             @csrf
             <div class="mb-3">
               <label  class="form-label">title</label>
-              <input type="text" name="title" class="form-control"  style="width:600px; height:100px">
+              <input type="text" name="title" class="form-control" >
             </div>
             <div class="mb-3">
               <label  class="form-label">body</label>
-              <input type="text" class="form-control" name="body" style="width:600px; height:200px" >
+              <textarea type="text" class="form-control" name="body"> </textarea>
             </div>
             <div class="mb-3">
               <label  class="form-label">enabled</label>
